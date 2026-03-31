@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apuração Eleitoral — Venâncio Aires 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --verde: #1D9E75; --verde-claro: #E1F5EE; --verde-borda: #9FE1CB; --verde-escuro: #0F6E56;
+    --azul: #378ADD; --azul-claro: #E6F1FB; --azul-borda: #B5D4F4; --azul-escuro: #185FA5;
+    --laranja: #D85A30; --laranja-claro: #FAECE7; --laranja-borda: #F0997B; --laranja-escuro: #993C1D;
+    --cinza: #888780; --cinza-claro: #F1EFE8; --cinza-borda: #D3D1C7; --cinza-escuro: #5F5E5A;
+    --amarelo: #BA7517; --amarelo-claro: #FAEEDA; --amarelo-borda: #FAC775;
+    --bg: #ffffff; --bg2: #f7f6f3; --bg3: #f0efe9;
+    --texto: #1a1a18; --texto2: #5a5955; --texto3: #9a9891;
+    --borda: rgba(0,0,0,0.12); --borda2: rgba(0,0,0,0.2);
+    --radius: 10px; --radius-sm: 6px;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--texto); min-height: 100vh; font-size: 15px; }
+
+  /* LOGIN */
+  #tela-login { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; }
+  .login-card { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 2rem; width: 100%; max-width: 380px; text-align: center; }
+  .login-logo { font-size: 28px; margin-bottom: 0.5rem; }
+  .login-title { font-size: 20px; font-weight: 600; margin-bottom: 0.25rem; }
+  .login-sub { font-size: 13px; color: var(--texto2); margin-bottom: 1.5rem; }
+  .login-card input { width: 100%; padding: 10px 14px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 15px; margin-bottom: 10px; background: var(--bg2); }
+  .btn-login { width: 100%; padding: 11px; background: var(--texto); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; cursor: pointer; }
+  .btn-login:hover { opacity: 0.85; }
+  .link-publico { margin-top: 1.25rem; font-size: 13px; color: var(--texto2); }
+  .link-publico a { color: var(--azul-escuro); text-decoration: none; }
+  .erro-login { color: #c0392b; font-size: 13px; margin-top: 8px; display: none; }
+
+  /* APP */
+  #app { display: none; }
+  .topbar { background: var(--bg); border-bottom: 0.5px solid var(--borda); padding: 0.875rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; position: sticky; top: 0; z-index: 10; }
+  .topbar-left { display: flex; flex-direction: column; }
+  .topbar-title { font-size: 16px; font-weight: 600; }
+  .topbar-sub { font-size: 12px; color: var(--texto2); }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .badge-ao-vivo { background: var(--verde-claro); color: var(--verde-escuro); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
+  .dot-vivo { width: 7px; height: 7px; border-radius: 50%; background: var(--verde); animation: pulse 1.4s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .btn-sair { font-size: 12px; color: var(--texto2); background: none; border: 0.5px solid var(--borda2); padding: 5px 12px; border-radius: var(--radius-sm); cursor: pointer; }
+
+  .tabs { background: var(--bg); border-bottom: 0.5px solid var(--borda); display: flex; overflow-x: auto; }
+  .tab { padding: 0.75rem 1.25rem; font-size: 14px; color: var(--texto2); border: none; background: none; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; }
+  .tab.ativa { color: var(--texto); border-bottom-color: var(--texto); font-weight: 500; }
+  .tab:hover:not(.ativa) { color: var(--texto); }
+
+  .conteudo { max-width: 900px; margin: 0 auto; padding: 1.25rem; }
+
+  .painel { display: none; }
+  .painel.ativo { display: block; }
+
+  /* MÉTRICAS */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+  .metric { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem; }
+  .metric-label { font-size: 12px; color: var(--texto2); margin-bottom: 4px; }
+  .metric-value { font-size: 24px; font-weight: 600; }
+  .metric-sub { font-size: 11px; color: var(--texto3); margin-top: 2px; }
+
+  /* PROGRESSO */
+  .prog-wrap { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 12px; }
+  .prog-label { font-size: 13px; color: var(--texto2); white-space: nowrap; }
+  .prog-track { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--verde); border-radius: 4px; transition: width 0.5s ease; }
+  .prog-pct { font-size: 14px; font-weight: 600; min-width: 48px; text-align: right; }
+
+  /* CANDIDATOS */
+  .section-title { font-size: 12px; font-weight: 600; color: var(--texto2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+  .candidatos-lista { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .cand-row { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .cand-row.lider { border-left: 3px solid var(--verde); }
+  .cand-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .cand-nome { font-size: 15px; font-weight: 600; }
+  .cand-partido { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-left: 8px; }
+  .partido-0 { background: var(--verde-claro); color: var(--verde-escuro); }
+  .partido-1 { background: var(--azul-claro); color: var(--azul-escuro); }
+  .partido-2 { background: var(--laranja-claro); color: var(--laranja-escuro); }
+  .partido-3 { background: var(--cinza-claro); color: var(--cinza-escuro); }
+  .partido-4 { background: var(--amarelo-claro); color: var(--amarelo); }
+  .cand-votos { font-size: 15px; font-weight: 600; }
+  .cand-pct { font-size: 12px; color: var(--texto2); }
+  .bar-track { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  .fill-0 { background: var(--verde); }
+  .fill-1 { background: var(--azul); }
+  .fill-2 { background: var(--laranja); }
+  .fill-3 { background: var(--cinza); }
+  .fill-4 { background: var(--amarelo); }
+
+  /* CHART */
+  .chart-card { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  .chart-wrap { position: relative; width: 100%; height: 220px; }
+
+  /* FORMULÁRIO */
+  .form-card { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
+  .form-titulo { font-size: 15px; font-weight: 600; margin-bottom: 1rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group label { font-size: 12px; color: var(--texto2); }
+  .form-group input, .form-group select { padding: 8px 12px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; background: var(--bg2); color: var(--texto); }
+  .cand-inputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-bottom: 12px; }
+  .cand-input-item { display: flex; flex-direction: column; gap: 4px; }
+  .cand-input-item label { font-size: 12px; color: var(--texto2); }
+  .cand-input-item input { padding: 8px 12px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; background: var(--bg2); color: var(--texto); }
+  .form-extras { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+  .btn-row { display: flex; gap: 8px; justify-content: flex-end; }
+  .btn-primary { background: var(--texto); color: #fff; border: none; padding: 9px 22px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: none; color: var(--texto2); border: 0.5px solid var(--borda2); padding: 9px 16px; border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; }
+  .btn-secondary:hover { background: var(--bg2); color: var(--texto); }
+  .btn-danger { background: none; color: #c0392b; border: 0.5px solid #e0b0ad; padding: 5px 12px; border-radius: var(--radius-sm); font-size: 12px; cursor: pointer; }
+  .alerta { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; margin-top: 12px; display: none; }
+  .alerta-ok { background: var(--verde-claro); color: var(--verde-escuro); }
+  .alerta-info { background: var(--azul-claro); color: var(--azul-escuro); }
+  .alerta-erro { background: var(--laranja-claro); color: var(--laranja-escuro); }
+
+  /* TABELA */
+  .tabela-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 10px; font-size: 12px; font-weight: 600; color: var(--texto2); border-bottom: 0.5px solid var(--borda); background: var(--bg2); }
+  td { padding: 9px 10px; border-bottom: 0.5px solid var(--borda); color: var(--texto); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg2); }
+  .empty { text-align: center; padding: 2.5rem; color: var(--texto3); font-size: 14px; }
+
+  /* RÁDIO */
+  .radio-card { background: var(--verde-claro); border: 0.5px solid var(--verde-borda); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .radio-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem; }
+  .radio-titulo { font-size: 13px; font-weight: 600; color: var(--verde-escuro); }
+  .radio-texto { font-size: 15px; color: var(--verde-escuro); line-height: 1.7; background: #fff; border-radius: var(--radius-sm); padding: 1rem; border: 0.5px solid var(--verde-borda); font-style: italic; }
+  .radio-acoes { display: flex; gap: 8px; margin-bottom: 1rem; }
+
+  /* CONFIG */
+  .config-section { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .config-titulo { font-size: 15px; font-weight: 600; margin-bottom: 1rem; }
+  .cand-config-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .cand-config-row input { flex: 1; padding: 7px 10px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; background: var(--bg2); }
+  .cand-config-row input.partido { max-width: 100px; }
+
+  /* PÚBLICO */
+  #tela-publica { display: none; }
+  .pub-header { background: var(--texto); color: #fff; padding: 1rem 1.25rem; text-align: center; }
+  .pub-title { font-size: 20px; font-weight: 700; }
+  .pub-sub { font-size: 13px; opacity: 0.7; margin-top: 2px; }
+  .pub-content { max-width: 700px; margin: 0 auto; padding: 1.25rem; }
+  .pub-ultimo { font-size: 12px; color: var(--texto3); text-align: center; margin-bottom: 1rem; }
+
+  @media (max-width: 500px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-extras { grid-template-columns: 1fr 1fr; }
+    .metrics { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TELA LOGIN ADMIN -->
+<div id="tela-login">
+  <div class="login-card">
+    <div class="login-logo">🗳️</div>
+    <div class="login-title">Apuração RVA 2026</div>
+    <div class="login-sub">Venâncio Aires / RS — Painel administrativo</div>
+    <input type="password" id="input-senha" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')entrar()">
+    <button class="btn-login" onclick="entrar()">Entrar</button>
+    <div class="erro-login" id="erro-login">Senha incorreta.</div>
+    <div class="link-publico">
+      Ouvinte? <a href="?publico=1">Acesse o painel ao vivo →</a>
+    </div>
+  </div>
+</div>
+
+<!-- APP ADMIN -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">🗳️ Apuração Eleitoral — Venâncio Aires 2026</div>
+      <div class="topbar-sub">Grupo RVA Rádio · Painel administrativo</div>
+    </div>
+    <div class="topbar-right">
+      <div class="badge-ao-vivo"><div class="dot-vivo"></div> Ao vivo</div>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab ativa" onclick="mostrarAba('painel',this)">Painel</button>
+    <button class="tab" onclick="mostrarAba('entrada',this)">Entrada de urna</button>
+    <button class="tab" onclick="mostrarAba('urnas',this)">Urnas registradas</button>
+    <button class="tab" onclick="mostrarAba('radio',this)">Texto para rádio</button>
+    <button class="tab" onclick="mostrarAba('config',this)">Configurar</button>
+  </div>
+
+  <div class="conteudo">
+
+    <!-- PAINEL -->
+    <div id="painel" class="painel ativo">
+      <div class="metrics" id="metricas"></div>
+      <div class="prog-wrap">
+        <div class="prog-label">Urnas apuradas</div>
+        <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+        <div class="prog-pct" id="prog-pct">0%</div>
+        <div style="font-size:13px;color:var(--texto2);" id="prog-nums">0 / 0</div>
+      </div>
+      <div class="section-title">Resultado parcial</div>
+      <div class="candidatos-lista" id="candidatos-painel"></div>
+      <div class="chart-card">
+        <div class="section-title">Votos por urna (últimas registradas)</div>
+        <div class="chart-wrap"><canvas id="grafico-urnas"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ENTRADA -->
+    <div id="entrada" class="painel">
+      <div class="form-card">
+        <div class="form-titulo">Registrar nova urna</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Número da seção</label>
+            <input type="number" id="f-secao" placeholder="ex: 47" min="1">
+          </div>
+          <div class="form-group">
+            <label>Local de votação</label>
+            <input type="text" id="f-local" placeholder="ex: Escola Alfredo Scherer">
+          </div>
+        </div>
+        <div class="section-title">Votos nominais por candidato</div>
+        <div class="cand-inputs-grid" id="form-candidatos"></div>
+        <div class="section-title">Outros</div>
+        <div class="form-extras">
+          <div class="form-group"><label>Brancos</label><input type="number" id="f-brancos" min="0" value="0"></div>
+          <div class="form-group"><label>Nulos</label><input type="number" id="f-nulos" min="0" value="0"></div>
+          <div class="form-group"><label>Abstenções</label><input type="number" id="f-abstencoes" min="0" value="0"></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-secondary" onclick="limparForm()">Limpar</button>
+          <button class="btn-primary" onclick="registrarUrna()">Registrar urna</button>
+        </div>
+        <div class="alerta" id="alerta-form"></div>
+      </div>
+    </div>
+
+    <!-- URNAS -->
+    <div id="urnas" class="painel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <div class="section-title" style="margin:0;">Urnas registradas</div>
+        <button class="btn-secondary" onclick="exportarCSV()" style="font-size:12px;padding:6px 14px;">Exportar CSV</button>
+      </div>
+      <div class="tabela-wrap" id="tabela-urnas"></div>
+    </div>
+
+    <!-- RÁDIO -->
+    <div id="radio" class="painel">
+      <div class="radio-card">
+        <div class="radio-header">
+          <div class="dot-vivo"></div>
+          <div class="radio-titulo">Texto ao vivo — Grupo RVA Rádio</div>
+        </div>
+        <div class="radio-texto" id="radio-texto">Aguardando as primeiras urnas...</div>
+      </div>
+      <div class="radio-acoes">
+        <button class="btn-primary" onclick="copiarTexto()">Copiar texto</button>
+        <button class="btn-secondary" onclick="gerarTexto()">Atualizar</button>
+      </div>
+      <p style="font-size:13px;color:var(--texto2);">Texto gerado automaticamente a cada urna registrada. Pronto para leitura no ar.</p>
+    </div>
+
+    <!-- CONFIG -->
+    <div id="config" class="painel">
+      <div class="config-section">
+        <div class="config-titulo">Candidatos e partidos</div>
+        <div id="config-candidatos"></div>
+        <button class="btn-secondary" onclick="addCandidato()" style="font-size:13px;margin-top:8px;">+ Adicionar candidato</button>
+      </div>
+      <div class="config-section">
+        <div class="config-titulo">Total de urnas da cidade</div>
+        <div class="form-group" style="max-width:180px;">
+          <label>Quantidade total</label>
+          <input type="number" id="cfg-total-urnas" value="176" min="1">
+        </div>
+        <p style="font-size:12px;color:var(--texto2);margin-top:6px;">Venâncio Aires teve 176 urnas em 2024.</p>
+      </div>
+      <div class="config-section">
+        <div class="config-titulo">Alterar senha de acesso</div>
+        <div class="form-group" style="max-width:260px;">
+          <label>Nova senha</label>
+          <input type="password" id="cfg-senha" placeholder="Digite a nova senha">
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top:1rem;">
+        <button class="btn-danger" onclick="zerarDados()">Zerar todos os dados</button>
+        <button class="btn-primary" onclick="salvarConfig()">Salvar configurações</button>
+      </div>
+      <div class="alerta" id="alerta-config"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAINEL PÚBLICO (ouvintes) -->
+<div id="tela-publica">
+  <div class="pub-header">
+    <div class="pub-title">🗳️ Apuração ao vivo — Venâncio Aires 2026</div>
+    <div class="pub-sub">Grupo RVA Rádio · Atualiza automaticamente</div>
+  </div>
+  <div class="pub-content">
+    <div class="pub-ultimo" id="pub-ultimo">Carregando...</div>
+    <div class="metrics" id="pub-metricas"></div>
+    <div class="prog-wrap">
+      <div class="prog-label">Apurado</div>
+      <div class="prog-track"><div class="prog-fill" id="pub-prog-fill" style="width:0%"></div></div>
+      <div class="prog-pct" id="pub-prog-pct">0%</div>
+      <div style="font-size:13px;color:var(--texto2);" id="pub-prog-nums">0 / 0</div>
+    </div>
+    <div class="section-title">Resultado parcial</div>
+    <div class="candidatos-lista" id="pub-candidatos"></div>
+    <div class="chart-card">
+      <div class="section-title">Votos por urna (últimas)</div>
+      <div class="chart-wrap"><canvas id="pub-grafico"></canvas></div>
+    </div>
+    <p style="font-size:12px;color:var(--texto3);text-align:center;margin-top:1rem;">Dados extraoficiais apurados pela equipe Grupo RVA Rádio</p>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  // ── Firebase config ──────────────────────────────────────────
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdnsvHPg_WvpyUN01Eczr4hckMiBW5W3w",
+    authDomain: "eleicoes-bd47b.firebaseapp.com",
+    databaseURL: "https://eleicoes-bd47b-default-rtdb.firebaseio.com",
+    projectId: "eleicoes-bd47b",
+    storageBucket: "eleicoes-bd47b.firebasestorage.app",
+    messagingSenderId: "1009563923371",
+    appId: "1:1009563923371:web:d25431a4f00a662f6b98ee"
+  };
+  const firebase = initializeApp(firebaseConfig);
+  const db = getDatabase(firebase);
+
+  // ── Estado local ─────────────────────────────────────────────
+  let estado = {
+    candidatos: [
+      {nome:'Cândido', partido:'PT'},
+      {nome:'Jarbas', partido:'PDT'},
+      {nome:'Maciel Marasca', partido:'PP'},
+      {nome:'Giovane', partido:'PSB'}
+    ],
+    urnas: {},
+    totalUrnas: 176,
+    senha: 'rva2026'
+  };
+
+  const CORES = ['#1D9E75','#378ADD','#D85A30','#888780','#BA7517','#993556'];
+  const CORES_BG = ['rgba(29,158,117,0.15)','rgba(55,138,221,0.15)','rgba(216,90,48,0.15)','rgba(136,135,128,0.15)'];
+  let chartAdmin = null, chartPub = null;
+  let modoPublico = new URLSearchParams(location.search).get('publico') === '1';
+
+  // ── Firebase listeners ────────────────────────────────────────
+  onValue(ref(db, 'config'), snap => {
+    const d = snap.val();
+    if (!d) return;
+    if (d.candidatos) estado.candidatos = d.candidatos;
+    if (d.totalUrnas) estado.totalUrnas = d.totalUrnas;
+    if (d.senha) estado.senha = d.senha;
+    atualizar();
+  });
+
+  onValue(ref(db, 'urnas'), snap => {
+    estado.urnas = snap.val() || {};
+    atualizar();
+  });
+
+  // ── Auth ──────────────────────────────────────────────────────
+  window.entrar = function() {
+    const s = document.getElementById('input-senha').value;
+    if (s === estado.senha) {
+      sessionStorage.setItem('auth', '1');
+      document.getElementById('tela-login').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      atualizar();
+    } else {
+      document.getElementById('erro-login').style.display = 'block';
+    }
+  };
+
+  window.sair = function() {
+    sessionStorage.removeItem('auth');
+    location.reload();
+  };
+
+  // ── Init ──────────────────────────────────────────────────────
+  if (modoPublico) {
+    document.getElementById('tela-login').style.display = 'none';
+    document.getElementById('tela-publica').style.display = 'block';
+  } else if (sessionStorage.getItem('auth') === '1') {
+    document.getElementById('tela-login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+
+  // ── Abas ──────────────────────────────────────────────────────
+  window.mostrarAba = function(id, btn) {
+    document.querySelectorAll('.painel').forEach(p => p.classList.remove('ativo'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('ativa'));
+    document.getElementById(id).classList.add('ativo');
+    btn.classList.add('ativa');
+    if (id === 'painel') atualizar();
+    if (id === 'entrada') renderFormCandidatos();
+    if (id === 'urnas') renderTabela();
+    if (id === 'radio') gerarTexto();
+    if (id === 'config') renderConfig();
+  };
+
+  // ── Cálculos ──────────────────────────────────────────────────
+  function calcular() {
+    const totais = estado.candidatos.map(() => 0);
+    let totalVotos = 0, brancos = 0, nulos = 0, abstencoes = 0;
+    Object.values(estado.urnas).forEach(u => {
+      (u.votos || []).forEach((v, i) => { totais[i] = (totais[i]||0) + v; totalVotos += v; });
+      brancos += u.brancos||0; nulos += u.nulos||0; abstencoes += u.abstencoes||0;
+    });
+    return { totais, totalVotos, brancos, nulos, abstencoes };
+  }
+
+  // ── Render principal ──────────────────────────────────────────
+  function atualizar() {
+    const { totais, totalVotos, brancos, nulos, abstencoes } = calcular();
+    const urnasList = Object.values(estado.urnas);
+    const n = urnasList.length;
+    const total = estado.totalUrnas;
+    const pct = total > 0 ? Math.round((n/total)*100) : 0;
+
+    // Admin
+    if (document.getElementById('app').style.display !== 'none') {
+      document.getElementById('metricas').innerHTML = metricasHTML(n, total, totalVotos, brancos, nulos, abstencoes);
+      document.getElementById('prog-fill').style.width = pct+'%';
+      document.getElementById('prog-pct').textContent = pct+'%';
+      document.getElementById('prog-nums').textContent = n+' / '+total;
+      document.getElementById('candidatos-painel').innerHTML = candidatosHTML(totais, totalVotos, 'fill');
+      renderGrafico('grafico-urnas', urnasList, 'admin');
+    }
+
+    // Público
+    if (document.getElementById('tela-publica').style.display !== 'none') {
+      document.getElementById('pub-metricas').innerHTML = metricasHTML(n, total, totalVotos, brancos, nulos, abstencoes);
+      document.getElementById('pub-prog-fill').style.width = pct+'%';
+      document.getElementById('pub-prog-pct').textContent = pct+'%';
+      document.getElementById('pub-prog-nums').textContent = n+' / '+total;
+      document.getElementById('pub-candidatos').innerHTML = candidatosHTML(totais, totalVotos, 'fill');
+      document.getElementById('pub-ultimo').textContent = n > 0 ? 'Última atualização: '+new Date().toLocaleTimeString('pt-BR') : 'Aguardando início da apuração...';
+      renderGrafico('pub-grafico', urnasList, 'pub');
+    }
+  }
+
+  function metricasHTML(n, total, totalVotos, brancos, nulos, abstencoes) {
+    return `
+      <div class="metric"><div class="metric-label">Urnas apuradas</div><div class="metric-value">${n}</div><div class="metric-sub">de ${total}</div></div>
+      <div class="metric"><div class="metric-label">Votos nominais</div><div class="metric-value">${totalVotos.toLocaleString('pt-BR')}</div></div>
+      <div class="metric"><div class="metric-label">Brancos</div><div class="metric-value">${brancos.toLocaleString('pt-BR')}</div></div>
+      <div class="metric"><div class="metric-label">Nulos</div><div class="metric-value">${nulos.toLocaleString('pt-BR')}</div></div>
+      <div class="metric"><div class="metric-label">Abstenções</div><div class="metric-value">${abstencoes.toLocaleString('pt-BR')}</div></div>`;
+  }
+
+  function candidatosHTML(totais, totalVotos, fillPrefix) {
+    const ord = estado.candidatos.map((c,i) => ({...c, votos: totais[i]||0, idx:i})).sort((a,b)=>b.votos-a.votos);
+    const max = ord[0]?.votos || 1;
+    return ord.map((c, rank) => {
+      const p = totalVotos > 0 ? ((c.votos/totalVotos)*100).toFixed(1) : '0.0';
+      const bw = max > 0 ? Math.round((c.votos/max)*100) : 0;
+      return `<div class="cand-row ${rank===0?'lider':''}">
+        <div class="cand-header">
+          <div><span class="cand-nome">${rank+1}. ${c.nome}</span><span class="cand-partido partido-${Math.min(c.idx,4)}">${c.partido}</span></div>
+          <div style="text-align:right"><div class="cand-votos">${c.votos.toLocaleString('pt-BR')} votos</div><div class="cand-pct">${p}% dos válidos</div></div>
+        </div>
+        <div class="bar-track"><div class="bar-fill fill-${Math.min(c.idx,4)}" style="width:${bw}%"></div></div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderGrafico(canvasId, urnasList, modo) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    const ultimas = urnasList.slice(-8);
+    const labels = ultimas.map(u => 'S-'+u.secao);
+    const datasets = estado.candidatos.map((c,i) => ({
+      label: c.nome,
+      data: ultimas.map(u => (u.votos||[])[i]||0),
+      backgroundColor: CORES_BG[i]||'rgba(136,135,128,0.15)',
+      borderColor: CORES[i]||'#888780',
+      borderWidth: 1.5, borderRadius: 4
+    }));
+    const existingChart = modo === 'admin' ? chartAdmin : chartPub;
+    if (existingChart) existingChart.destroy();
+    const newChart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, position: 'top', labels: { font:{size:11}, boxWidth:10, padding:10 } } },
+        scales: {
+          x: { grid:{display:false}, ticks:{font:{size:11}} },
+          y: { grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:11}} }
+        }
+      }
+    });
+    if (modo === 'admin') chartAdmin = newChart; else chartPub = newChart;
+  }
+
+  // ── Formulário de urna ────────────────────────────────────────
+  function renderFormCandidatos() {
+    const c = document.getElementById('form-candidatos');
+    c.innerHTML = '';
+    estado.candidatos.forEach((cand, i) => {
+      c.innerHTML += `<div class="cand-input-item"><label><span class="cand-partido partido-${Math.min(i,4)}">${cand.partido}</span> ${cand.nome}</label><input type="number" id="fv-${i}" min="0" value="0"></div>`;
+    });
+  }
+
+  window.limparForm = function() {
+    document.getElementById('f-secao').value = '';
+    document.getElementById('f-local').value = '';
+    document.getElementById('f-brancos').value = 0;
+    document.getElementById('f-nulos').value = 0;
+    document.getElementById('f-abstencoes').value = 0;
+    estado.candidatos.forEach((_,i) => { const el = document.getElementById('fv-'+i); if(el) el.value = 0; });
+  };
+
+  window.registrarUrna = async function() {
+    const secao = document.getElementById('f-secao').value.trim();
+    const local = document.getElementById('f-local').value.trim();
+    if (!secao) { mostrarAlerta('alerta-form', 'Informe o número da seção.', 'info'); return; }
+    if (estado.urnas['s'+secao]) { mostrarAlerta('alerta-form', `Seção ${secao} já foi registrada!`, 'info'); return; }
+    const votos = estado.candidatos.map((_,i) => parseInt(document.getElementById('fv-'+i)?.value)||0);
+    const urna = {
+      secao: parseInt(secao),
+      local: local || 'Não informado',
+      votos,
+      brancos: parseInt(document.getElementById('f-brancos').value)||0,
+      nulos: parseInt(document.getElementById('f-nulos').value)||0,
+      abstencoes: parseInt(document.getElementById('f-abstencoes').value)||0,
+      ts: new Date().toLocaleTimeString('pt-BR')
+    };
+    try {
+      await set(ref(db, 'urnas/s'+secao), urna);
+      mostrarAlerta('alerta-form', `Seção ${secao} registrada com sucesso!`, 'ok');
+      limparForm();
+    } catch(e) {
+      mostrarAlerta('alerta-form', 'Erro ao salvar. Verifique a conexão.', 'erro');
+    }
+  };
+
+  // ── Tabela ────────────────────────────────────────────────────
+  window.renderTabela = function() {
+    const cont = document.getElementById('tabela-urnas');
+    const lista = Object.values(estado.urnas);
+    if (lista.length === 0) { cont.innerHTML = '<div class="empty">Nenhuma urna registrada ainda.</div>'; return; }
+    lista.sort((a,b) => a.secao - b.secao);
+    const ths = ['Seção','Local','Horário',...estado.candidatos.map(c=>c.nome),'Brancos','Nulos','Abstenções',''];
+    let html = `<table><thead><tr>${ths.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+    lista.forEach(u => {
+      html += `<tr><td><strong>${u.secao}</strong></td><td>${u.local}</td><td>${u.ts}</td>`;
+      (u.votos||[]).forEach(v => { html += `<td>${v}</td>`; });
+      html += `<td>${u.brancos}</td><td>${u.nulos}</td><td>${u.abstencoes}</td>`;
+      html += `<td><button class="btn-danger" onclick="removerUrna('s${u.secao}')">remover</button></td></tr>`;
+    });
+    html += '</tbody></table>';
+    cont.innerHTML = html;
+  };
+
+  window.removerUrna = async function(key) {
+    if (!confirm('Remover esta urna?')) return;
+    await remove(ref(db, 'urnas/'+key));
+  };
+
+  window.exportarCSV = function() {
+    const lista = Object.values(estado.urnas);
+    if (lista.length === 0) return;
+    const headers = ['Seção','Local','Horário',...estado.candidatos.map(c=>c.nome+' ('+c.partido+')'),'Brancos','Nulos','Abstenções'];
+    const rows = lista.map(u => [u.secao,u.local,u.ts,...(u.votos||[]),u.brancos,u.nulos,u.abstencoes]);
+    const csv = [headers,...rows].map(r=>r.join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+    a.download = 'apuracao_venancio_aires_2026.csv';
+    a.click();
+  };
+
+  // ── Rádio ─────────────────────────────────────────────────────
+  window.gerarTexto = function() {
+    const { totais, totalVotos, brancos, nulos } = calcular();
+    const n = Object.values(estado.urnas).length;
+    const total = estado.totalUrnas;
+    const pct = total > 0 ? Math.round((n/total)*100) : 0;
+    if (n === 0) { document.getElementById('radio-texto').textContent = 'Aguardando as primeiras urnas...'; return; }
+    const ord = estado.candidatos.map((c,i) => ({...c, votos:totais[i]||0})).sort((a,b)=>b.votos-a.votos);
+    const lider = ord[0], seg = ord[1];
+    const diff = lider.votos - seg.votos;
+    const p1 = totalVotos > 0 ? ((lider.votos/totalVotos)*100).toFixed(1) : '0';
+    const p2 = totalVotos > 0 ? ((seg.votos/totalVotos)*100).toFixed(1) : '0';
+    let t = `Atenção ouvintes da Rádio RVA! Apuração parcial com ${n} de ${total} urnas apuradas — ${pct}% do total. `;
+    t += `Na liderança parcial está ${lider.nome}, do ${lider.partido}, com ${lider.votos.toLocaleString('pt-BR')} votos — ${p1}% dos válidos. `;
+    t += `Em segundo lugar, ${seg.nome}, do ${seg.partido}, com ${seg.votos.toLocaleString('pt-BR')} votos — ${p2}% — e diferença de ${diff.toLocaleString('pt-BR')} votos para o líder. `;
+    if (ord[2]) { const p3 = totalVotos>0?((ord[2].votos/totalVotos)*100).toFixed(1):'0'; t += `${ord[2].nome}, do ${ord[2].partido}, aparece em terceiro com ${ord[2].votos.toLocaleString('pt-BR')} votos — ${p3}%. `; }
+    t += `Foram registrados ${brancos.toLocaleString('pt-BR')} votos em branco e ${nulos.toLocaleString('pt-BR')} nulos. Continuamos ao vivo aqui na Rádio RVA com todos os números em primeira mão!`;
+    document.getElementById('radio-texto').textContent = t;
+  };
+
+  window.copiarTexto = function() {
+    navigator.clipboard.writeText(document.getElementById('radio-texto').textContent);
+    mostrarAlerta('alerta-form','','');
+    alert('Texto copiado!');
+  };
+
+  // ── Config ────────────────────────────────────────────────────
+  window.renderConfig = function() {
+    document.getElementById('cfg-total-urnas').value = estado.totalUrnas;
+    const c = document.getElementById('config-candidatos');
+    c.innerHTML = '';
+    estado.candidatos.forEach((cand, i) => {
+      c.innerHTML += `<div class="cand-config-row">
+        <input type="text" value="${cand.nome}" onchange="estado.candidatos[${i}].nome=this.value" placeholder="Nome">
+        <input type="text" class="partido" value="${cand.partido}" onchange="estado.candidatos[${i}].partido=this.value" placeholder="Partido">
+        <button class="btn-danger" onclick="removerCandidato(${i})">✕</button>
+      </div>`;
+    });
+  };
+
+  window.addCandidato = function() {
+    estado.candidatos.push({nome:'Candidato', partido:'Partido'});
+    renderConfig();
+  };
+
+  window.removerCandidato = function(i) {
+    if (estado.candidatos.length <= 2) return;
+    estado.candidatos.splice(i,1);
+    renderConfig();
+  };
+
+  window.salvarConfig = async function() {
+    const novaSenha = document.getElementById('cfg-senha').value.trim();
+    const cfg = {
+      candidatos: estado.candidatos,
+      totalUrnas: parseInt(document.getElementById('cfg-total-urnas').value)||176,
+      senha: novaSenha || estado.senha
+    };
+    try {
+      await set(ref(db,'config'), cfg);
+      mostrarAlerta('alerta-config','Configurações salvas com sucesso!','ok');
+      document.getElementById('cfg-senha').value = '';
+    } catch(e) {
+      mostrarAlerta('alerta-config','Erro ao salvar.','erro');
+    }
+  };
+
+  window.zerarDados = async function() {
+    if (!confirm('Zerar TODOS os dados de apuração? Esta ação não pode ser desfeita.')) return;
+    await remove(ref(db,'urnas'));
+    mostrarAlerta('alerta-config','Dados zerados com sucesso.','ok');
+  };
+
+  // ── Utilitários ───────────────────────────────────────────────
+  function mostrarAlerta(id, msg, tipo) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.className = 'alerta alerta-'+tipo;
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 3500);
+  }
+
+  // Expor estado para o config inline
+  window.estado = estado;
+
+  renderFormCandidatos();
+  atualizar();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+</body>
+</html>
