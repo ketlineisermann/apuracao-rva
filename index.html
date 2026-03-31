@@ -4,188 +4,227 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apuração Eleitoral — Venâncio Aires 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --verde: #1D9E75; --verde-claro: #E1F5EE; --verde-borda: #9FE1CB; --verde-escuro: #0F6E56;
-    --azul: #378ADD; --azul-claro: #E6F1FB; --azul-borda: #B5D4F4; --azul-escuro: #185FA5;
-    --laranja: #D85A30; --laranja-claro: #FAECE7; --laranja-borda: #F0997B; --laranja-escuro: #993C1D;
-    --cinza: #888780; --cinza-claro: #F1EFE8; --cinza-borda: #D3D1C7; --cinza-escuro: #5F5E5A;
-    --amarelo: #BA7517; --amarelo-claro: #FAEEDA; --amarelo-borda: #FAC775;
-    --bg: #ffffff; --bg2: #f7f6f3; --bg3: #f0efe9;
-    --texto: #1a1a18; --texto2: #5a5955; --texto3: #9a9891;
-    --borda: rgba(0,0,0,0.12); --borda2: rgba(0,0,0,0.2);
-    --radius: 10px; --radius-sm: 6px;
+    --navy:       #0B1F3A;
+    --navy-mid:   #122848;
+    --navy-light: #1A3A60;
+    --navy-faint: #EDF2F8;
+    --azul:       #2563EB;
+    --azul-light: #DBEAFE;
+    --ouro:       #C8972A;
+    --ouro-light: #FEF3CD;
+    --verde:      #16A34A;
+    --verde-light:#DCFCE7;
+    --vermelho:   #DC2626;
+    --verm-light: #FEE2E2;
+    --cinza:      #6B7280;
+    --branco:     #FFFFFF;
+    --bg:         #F8FAFC;
+    --borda:      rgba(11,31,58,0.1);
+    --borda2:     rgba(11,31,58,0.18);
+    --texto:      #0B1F3A;
+    --texto2:     #4B5563;
+    --texto3:     #9CA3AF;
+    --radius:     10px;
+    --radius-sm:  6px;
+    --sombra:     0 1px 4px rgba(11,31,58,0.08);
   }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--texto); min-height: 100vh; font-size: 15px; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--texto); min-height: 100vh; font-size: 15px; line-height: 1.5; }
 
   /* LOGIN */
-  #tela-login { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; }
-  .login-card { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 2rem; width: 100%; max-width: 380px; text-align: center; }
-  .login-logo { font-size: 28px; margin-bottom: 0.5rem; }
-  .login-title { font-size: 20px; font-weight: 600; margin-bottom: 0.25rem; }
-  .login-sub { font-size: 13px; color: var(--texto2); margin-bottom: 1.5rem; }
-  .login-card input { width: 100%; padding: 10px 14px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 15px; margin-bottom: 10px; background: var(--bg2); }
-  .btn-login { width: 100%; padding: 11px; background: var(--texto); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; cursor: pointer; }
-  .btn-login:hover { opacity: 0.85; }
-  .link-publico { margin-top: 1.25rem; font-size: 13px; color: var(--texto2); }
-  .link-publico a { color: var(--azul-escuro); text-decoration: none; }
-  .erro-login { color: #c0392b; font-size: 13px; margin-top: 8px; display: none; }
+  #tela-login { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--navy); padding: 1rem; }
+  .login-card { background: var(--branco); border-radius: 14px; padding: 2.5rem 2rem; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
+  .login-marca { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: var(--navy); border-radius: 14px; margin-bottom: 1.25rem; font-size: 26px; }
+  .login-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700; color: var(--navy); letter-spacing: 0.01em; }
+  .login-sub { font-size: 13px; color: var(--texto2); margin-top: 4px; margin-bottom: 1.75rem; }
+  .login-card input { width: 100%; padding: 11px 14px; border: 1px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 10px; background: var(--bg); color: var(--texto); outline: none; transition: border-color 0.2s; }
+  .login-card input:focus { border-color: var(--azul); }
+  .btn-login { width: 100%; padding: 12px; background: var(--navy); color: var(--branco); border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .btn-login:hover { background: var(--navy-light); }
+  .link-publico { margin-top: 1.5rem; font-size: 13px; color: var(--texto2); }
+  .link-publico a { color: var(--azul); text-decoration: none; font-weight: 500; }
+  .erro-login { color: var(--vermelho); font-size: 13px; margin-top: 8px; display: none; }
 
   /* APP */
   #app { display: none; }
-  .topbar { background: var(--bg); border-bottom: 0.5px solid var(--borda); padding: 0.875rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; position: sticky; top: 0; z-index: 10; }
-  .topbar-left { display: flex; flex-direction: column; }
-  .topbar-title { font-size: 16px; font-weight: 600; }
-  .topbar-sub { font-size: 12px; color: var(--texto2); }
+  .topbar { background: var(--navy); padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; height: 58px; position: sticky; top: 0; z-index: 20; }
+  .topbar-marca { display: flex; align-items: center; gap: 10px; }
+  .topbar-icone { font-size: 20px; }
+  .topbar-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--branco); letter-spacing: 0.03em; }
+  .topbar-sub { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.02em; }
   .topbar-right { display: flex; align-items: center; gap: 10px; }
-  .badge-ao-vivo { background: var(--verde-claro); color: var(--verde-escuro); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
-  .dot-vivo { width: 7px; height: 7px; border-radius: 50%; background: var(--verde); animation: pulse 1.4s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-  .btn-sair { font-size: 12px; color: var(--texto2); background: none; border: 0.5px solid var(--borda2); padding: 5px 12px; border-radius: var(--radius-sm); cursor: pointer; }
+  .badge-ao-vivo { background: rgba(22,163,74,0.2); border: 1px solid rgba(22,163,74,0.35); color: #4ADE80; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .dot-vivo { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; animation: pulsar 1.4s infinite; }
+  @keyframes pulsar { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+  .btn-sair { font-size: 12px; color: rgba(255,255,255,0.55); background: none; border: 1px solid rgba(255,255,255,0.18); padding: 5px 14px; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+  .btn-sair:hover { color: #fff; border-color: rgba(255,255,255,0.45); }
 
-  .tabs { background: var(--bg); border-bottom: 0.5px solid var(--borda); display: flex; overflow-x: auto; }
-  .tab { padding: 0.75rem 1.25rem; font-size: 14px; color: var(--texto2); border: none; background: none; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; }
-  .tab.ativa { color: var(--texto); border-bottom-color: var(--texto); font-weight: 500; }
-  .tab:hover:not(.ativa) { color: var(--texto); }
+  .tabs { background: var(--navy-mid); display: flex; overflow-x: auto; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 0.75rem 1.25rem; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.45); border: none; background: none; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.2s; font-family: 'Inter', sans-serif; letter-spacing: 0.01em; }
+  .tab.ativa { color: #fff; border-bottom-color: var(--ouro); }
+  .tab:hover:not(.ativa) { color: rgba(255,255,255,0.8); }
 
-  .conteudo { max-width: 900px; margin: 0 auto; padding: 1.25rem; }
-
+  .conteudo { max-width: 920px; margin: 0 auto; padding: 1.5rem 1.25rem; }
   .painel { display: none; }
   .painel.ativo { display: block; }
 
   /* MÉTRICAS */
-  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
-  .metric { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem; }
-  .metric-label { font-size: 12px; color: var(--texto2); margin-bottom: 4px; }
-  .metric-value { font-size: 24px; font-weight: 600; }
-  .metric-sub { font-size: 11px; color: var(--texto3); margin-top: 2px; }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+  .metric { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--sombra); }
+  .metric-label { font-size: 11px; font-weight: 700; color: var(--texto3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .metric-value { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .metric-sub { font-size: 11px; color: var(--texto3); margin-top: 4px; }
 
   /* PROGRESSO */
-  .prog-wrap { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 12px; }
-  .prog-label { font-size: 13px; color: var(--texto2); white-space: nowrap; }
-  .prog-track { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
-  .prog-fill { height: 100%; background: var(--verde); border-radius: 4px; transition: width 0.5s ease; }
-  .prog-pct { font-size: 14px; font-weight: 600; min-width: 48px; text-align: right; }
+  .prog-wrap { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 14px; box-shadow: var(--sombra); }
+  .prog-label { font-size: 11px; font-weight: 700; color: var(--texto3); white-space: nowrap; text-transform: uppercase; letter-spacing: 0.07em; }
+  .prog-track { flex: 1; height: 8px; background: var(--navy-faint); border-radius: 4px; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--navy); border-radius: 4px; transition: width 0.6s ease; }
+  .prog-pct { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); min-width: 48px; text-align: right; }
+  .prog-nums { font-size: 12px; color: var(--texto3); white-space: nowrap; }
 
   /* CANDIDATOS */
-  .section-title { font-size: 12px; font-weight: 600; color: var(--texto2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+  .section-label { font-size: 11px; font-weight: 700; color: var(--texto3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
   .candidatos-lista { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
-  .cand-row { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; }
-  .cand-row.lider { border-left: 3px solid var(--verde); }
-  .cand-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .cand-nome { font-size: 15px; font-weight: 600; }
-  .cand-partido { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-left: 8px; }
-  .partido-0 { background: var(--verde-claro); color: var(--verde-escuro); }
-  .partido-1 { background: var(--azul-claro); color: var(--azul-escuro); }
-  .partido-2 { background: var(--laranja-claro); color: var(--laranja-escuro); }
-  .partido-3 { background: var(--cinza-claro); color: var(--cinza-escuro); }
-  .partido-4 { background: var(--amarelo-claro); color: var(--amarelo); }
-  .cand-votos { font-size: 15px; font-weight: 600; }
-  .cand-pct { font-size: 12px; color: var(--texto2); }
-  .bar-track { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  .cand-row { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--sombra); }
+  .cand-row.lider { border-left: 4px solid var(--ouro); background: linear-gradient(to right, #FFFDF5 0%, var(--branco) 55%); }
+  .cand-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .cand-esq { display: flex; align-items: center; gap: 10px; }
+  .cand-rank { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--texto3); min-width: 24px; line-height: 1; }
+  .cand-rank.primeiro { color: var(--ouro); }
+  .cand-nome { font-size: 15px; font-weight: 600; color: var(--navy); }
+  .cand-partido { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .partido-0 { background: #DCFCE7; color: #166534; }
+  .partido-1 { background: #DBEAFE; color: #1E40AF; }
+  .partido-2 { background: #FEE2E2; color: #991B1B; }
+  .partido-3 { background: #F3F4F6; color: #374151; }
+  .partido-4 { background: #FEF3CD; color: #92400E; }
+  .cand-dir { text-align: right; }
+  .cand-votos { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .cand-pct { font-size: 12px; color: var(--texto2); margin-top: 2px; }
+  .bar-track { height: 5px; background: var(--navy-faint); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.7s ease; }
   .fill-0 { background: var(--verde); }
   .fill-1 { background: var(--azul); }
-  .fill-2 { background: var(--laranja); }
+  .fill-2 { background: var(--vermelho); }
   .fill-3 { background: var(--cinza); }
-  .fill-4 { background: var(--amarelo); }
+  .fill-4 { background: var(--ouro); }
 
-  /* CHART */
-  .chart-card { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  /* GRÁFICO */
+  .chart-card { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); padding: 1.1rem 1.25rem 1.25rem; margin-bottom: 1.25rem; box-shadow: var(--sombra); }
   .chart-wrap { position: relative; width: 100%; height: 220px; }
 
   /* FORMULÁRIO */
-  .form-card { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
-  .form-titulo { font-size: 15px; font-weight: 600; margin-bottom: 1rem; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .form-group { display: flex; flex-direction: column; gap: 4px; }
-  .form-group label { font-size: 12px; color: var(--texto2); }
-  .form-group input, .form-group select { padding: 8px 12px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; background: var(--bg2); color: var(--texto); }
-  .cand-inputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-bottom: 12px; }
-  .cand-input-item { display: flex; flex-direction: column; gap: 4px; }
-  .cand-input-item label { font-size: 12px; color: var(--texto2); }
-  .cand-input-item input { padding: 8px 12px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; background: var(--bg2); color: var(--texto); }
-  .form-extras { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+  .form-card { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: var(--sombra); }
+  .form-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group label { font-size: 11px; font-weight: 700; color: var(--texto3); text-transform: uppercase; letter-spacing: 0.07em; }
+  .form-group input { padding: 9px 12px; border: 1px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--texto); outline: none; transition: border-color 0.2s; }
+  .form-group input:focus { border-color: var(--azul); }
+  .cand-inputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .cand-input-item { display: flex; flex-direction: column; gap: 5px; }
+  .cand-input-item label { font-size: 11px; font-weight: 700; color: var(--texto3); text-transform: uppercase; letter-spacing: 0.07em; }
+  .cand-input-item input { padding: 9px 12px; border: 1px solid var(--borda2); border-radius: var(--radius-sm); font-size: 16px; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; background: var(--bg); color: var(--navy); outline: none; transition: border-color 0.2s; }
+  .cand-input-item input:focus { border-color: var(--azul); }
+  .form-extras { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+  .divisor { border: none; border-top: 1px solid var(--borda); margin: 1rem 0; }
   .btn-row { display: flex; gap: 8px; justify-content: flex-end; }
-  .btn-primary { background: var(--texto); color: #fff; border: none; padding: 9px 22px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-secondary { background: none; color: var(--texto2); border: 0.5px solid var(--borda2); padding: 9px 16px; border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; }
-  .btn-secondary:hover { background: var(--bg2); color: var(--texto); }
-  .btn-danger { background: none; color: #c0392b; border: 0.5px solid #e0b0ad; padding: 5px 12px; border-radius: var(--radius-sm); font-size: 12px; cursor: pointer; }
-  .alerta { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; margin-top: 12px; display: none; }
-  .alerta-ok { background: var(--verde-claro); color: var(--verde-escuro); }
-  .alerta-info { background: var(--azul-claro); color: var(--azul-escuro); }
-  .alerta-erro { background: var(--laranja-claro); color: var(--laranja-escuro); }
+  .btn-primary { background: var(--navy); color: var(--branco); border: none; padding: 10px 24px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--navy-light); }
+  .btn-secondary { background: none; color: var(--texto2); border: 1px solid var(--borda2); padding: 10px 18px; border-radius: var(--radius-sm); font-size: 14px; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .btn-secondary:hover { background: var(--navy-faint); color: var(--navy); border-color: var(--navy); }
+  .btn-danger { background: none; color: var(--vermelho); border: 1px solid #FECACA; padding: 5px 12px; border-radius: var(--radius-sm); font-size: 12px; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .btn-danger:hover { background: var(--verm-light); }
+  .alerta { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; margin-top: 12px; display: none; font-weight: 500; }
+  .alerta-ok { background: var(--verde-light); color: #166534; }
+  .alerta-info { background: var(--azul-light); color: #1E40AF; }
+  .alerta-erro { background: var(--verm-light); color: #991B1B; }
 
   /* TABELA */
-  .tabela-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 8px 10px; font-size: 12px; font-weight: 600; color: var(--texto2); border-bottom: 0.5px solid var(--borda); background: var(--bg2); }
-  td { padding: 9px 10px; border-bottom: 0.5px solid var(--borda); color: var(--texto); }
+  .tabela-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--borda); box-shadow: var(--sombra); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--branco); }
+  thead { background: var(--navy); }
+  th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.07em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--borda); color: var(--texto); }
   tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--bg2); }
-  .empty { text-align: center; padding: 2.5rem; color: var(--texto3); font-size: 14px; }
+  tr:hover td { background: var(--navy-faint); }
+  .empty { text-align: center; padding: 3rem; color: var(--texto3); font-size: 14px; background: var(--branco); border-radius: var(--radius); border: 1px solid var(--borda); }
 
   /* RÁDIO */
-  .radio-card { background: var(--verde-claro); border: 0.5px solid var(--verde-borda); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
-  .radio-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem; }
-  .radio-titulo { font-size: 13px; font-weight: 600; color: var(--verde-escuro); }
-  .radio-texto { font-size: 15px; color: var(--verde-escuro); line-height: 1.7; background: #fff; border-radius: var(--radius-sm); padding: 1rem; border: 0.5px solid var(--verde-borda); font-style: italic; }
-  .radio-acoes { display: flex; gap: 8px; margin-bottom: 1rem; }
+  .radio-card { background: var(--navy); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
+  .radio-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .radio-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.05em; text-transform: uppercase; }
+  .radio-texto { font-size: 15px; color: rgba(255,255,255,0.88); line-height: 1.8; background: rgba(255,255,255,0.07); border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; border: 1px solid rgba(255,255,255,0.1); font-style: italic; }
+  .radio-acoes { display: flex; gap: 8px; margin-bottom: 1rem; margin-top: 1rem; }
+  .btn-radio { background: rgba(255,255,255,0.12); color: var(--branco); border: 1px solid rgba(255,255,255,0.22); padding: 9px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .btn-radio:hover { background: rgba(255,255,255,0.22); }
 
   /* CONFIG */
-  .config-section { background: var(--bg); border: 0.5px solid var(--borda); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
-  .config-titulo { font-size: 15px; font-weight: 600; margin-bottom: 1rem; }
+  .config-section { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--sombra); }
+  .config-titulo { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
   .cand-config-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
-  .cand-config-row input { flex: 1; padding: 7px 10px; border: 0.5px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; background: var(--bg2); }
+  .cand-config-row input { flex: 1; padding: 8px 10px; border: 1px solid var(--borda2); border-radius: var(--radius-sm); font-size: 14px; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--texto); outline: none; }
+  .cand-config-row input:focus { border-color: var(--azul); }
   .cand-config-row input.partido { max-width: 100px; }
 
-  /* PÚBLICO */
+  /* PAINEL PÚBLICO */
   #tela-publica { display: none; }
-  .pub-header { background: var(--texto); color: #fff; padding: 1rem 1.25rem; text-align: center; }
-  .pub-title { font-size: 20px; font-weight: 700; }
-  .pub-sub { font-size: 13px; opacity: 0.7; margin-top: 2px; }
-  .pub-content { max-width: 700px; margin: 0 auto; padding: 1.25rem; }
-  .pub-ultimo { font-size: 12px; color: var(--texto3); text-align: center; margin-bottom: 1rem; }
+  .pub-topbar { background: var(--navy); }
+  .pub-hero { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 1.75rem; display: flex; align-items: center; gap: 1.25rem; }
+  .pub-icone { width: 52px; height: 52px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .pub-title { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; color: var(--branco); letter-spacing: 0.02em; line-height: 1.1; }
+  .pub-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+  .pub-live { display: flex; align-items: center; gap: 6px; background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.28); color: #4ADE80; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; margin-top: 10px; width: fit-content; text-transform: uppercase; letter-spacing: 0.06em; }
+  .pub-content { max-width: 720px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+  .pub-ultimo { text-align: center; font-size: 12px; color: var(--texto3); margin-bottom: 1.25rem; background: var(--branco); border: 1px solid var(--borda); border-radius: 20px; padding: 5px 16px; width: fit-content; margin-left: auto; margin-right: auto; }
+  .pub-footer { text-align: center; font-size: 12px; color: var(--texto3); margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--borda); }
 
-  @media (max-width: 500px) {
+  @media (max-width: 520px) {
     .form-grid { grid-template-columns: 1fr; }
     .form-extras { grid-template-columns: 1fr 1fr; }
     .metrics { grid-template-columns: repeat(2,1fr); }
+    .topbar { height: auto; padding: 0.75rem 1rem; }
+    .pub-hero { gap: 0.75rem; }
+    .pub-title { font-size: 21px; }
   }
 </style>
 </head>
 <body>
 
-<!-- TELA LOGIN ADMIN -->
+<!-- LOGIN -->
 <div id="tela-login">
   <div class="login-card">
-    <div class="login-logo">🗳️</div>
-    <div class="login-title">Apuração RVA 2026</div>
-    <div class="login-sub">Venâncio Aires / RS — Painel administrativo</div>
+    <div class="login-marca">🗳️</div>
+    <div class="login-title">Apuração Eleitoral 2026</div>
+    <div class="login-sub">Venâncio Aires / RS · Painel administrativo</div>
     <input type="password" id="input-senha" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')entrar()">
     <button class="btn-login" onclick="entrar()">Entrar</button>
-    <div class="erro-login" id="erro-login">Senha incorreta.</div>
-    <div class="link-publico">
-      Ouvinte? <a href="?publico=1">Acesse o painel ao vivo →</a>
-    </div>
+    <div class="erro-login" id="erro-login">Senha incorreta. Tente novamente.</div>
+    <div class="link-publico">Ouvinte? <a href="?publico=1">Acesse o painel ao vivo →</a></div>
   </div>
 </div>
 
 <!-- APP ADMIN -->
 <div id="app">
   <div class="topbar">
-    <div class="topbar-left">
-      <div class="topbar-title">🗳️ Apuração Eleitoral — Venâncio Aires 2026</div>
-      <div class="topbar-sub">Grupo RVA Rádio · Painel administrativo</div>
+    <div class="topbar-marca">
+      <span class="topbar-icone">🗳️</span>
+      <div>
+        <div class="topbar-title">Apuração Eleitoral 2026</div>
+        <div class="topbar-sub">Venâncio Aires · RS · Painel administrativo</div>
+      </div>
     </div>
     <div class="topbar-right">
       <div class="badge-ao-vivo"><div class="dot-vivo"></div> Ao vivo</div>
       <button class="btn-sair" onclick="sair()">Sair</button>
     </div>
   </div>
-
   <div class="tabs">
     <button class="tab ativa" onclick="mostrarAba('painel',this)">Painel</button>
     <button class="tab" onclick="mostrarAba('entrada',this)">Entrada de urna</button>
@@ -193,43 +232,36 @@
     <button class="tab" onclick="mostrarAba('radio',this)">Texto para rádio</button>
     <button class="tab" onclick="mostrarAba('config',this)">Configurar</button>
   </div>
-
   <div class="conteudo">
 
-    <!-- PAINEL -->
     <div id="painel" class="painel ativo">
       <div class="metrics" id="metricas"></div>
       <div class="prog-wrap">
-        <div class="prog-label">Urnas apuradas</div>
+        <div class="prog-label">Apurado</div>
         <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
         <div class="prog-pct" id="prog-pct">0%</div>
-        <div style="font-size:13px;color:var(--texto2);" id="prog-nums">0 / 0</div>
+        <div class="prog-nums" id="prog-nums">0 / 0 urnas</div>
       </div>
-      <div class="section-title">Resultado parcial</div>
+      <div class="section-label">Resultado parcial</div>
       <div class="candidatos-lista" id="candidatos-painel"></div>
       <div class="chart-card">
-        <div class="section-title">Votos por urna (últimas registradas)</div>
+        <div class="section-label">Votos por urna — últimas registradas</div>
         <div class="chart-wrap"><canvas id="grafico-urnas"></canvas></div>
       </div>
     </div>
 
-    <!-- ENTRADA -->
     <div id="entrada" class="painel">
       <div class="form-card">
         <div class="form-titulo">Registrar nova urna</div>
         <div class="form-grid">
-          <div class="form-group">
-            <label>Número da seção</label>
-            <input type="number" id="f-secao" placeholder="ex: 47" min="1">
-          </div>
-          <div class="form-group">
-            <label>Local de votação</label>
-            <input type="text" id="f-local" placeholder="ex: Escola Alfredo Scherer">
-          </div>
+          <div class="form-group"><label>Número da seção</label><input type="number" id="f-secao" placeholder="ex: 47" min="1"></div>
+          <div class="form-group"><label>Local de votação</label><input type="text" id="f-local" placeholder="ex: Escola Alfredo Scherer"></div>
         </div>
-        <div class="section-title">Votos nominais por candidato</div>
+        <hr class="divisor">
+        <div class="section-label" style="margin-bottom:10px;">Votos nominais por candidato</div>
         <div class="cand-inputs-grid" id="form-candidatos"></div>
-        <div class="section-title">Outros</div>
+        <hr class="divisor">
+        <div class="section-label" style="margin-bottom:10px;">Outros votos</div>
         <div class="form-extras">
           <div class="form-group"><label>Brancos</label><input type="number" id="f-brancos" min="0" value="0"></div>
           <div class="form-group"><label>Nulos</label><input type="number" id="f-nulos" min="0" value="0"></div>
@@ -243,32 +275,26 @@
       </div>
     </div>
 
-    <!-- URNAS -->
     <div id="urnas" class="painel">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-        <div class="section-title" style="margin:0;">Urnas registradas</div>
+        <div class="section-label" style="margin:0;">Urnas registradas</div>
         <button class="btn-secondary" onclick="exportarCSV()" style="font-size:12px;padding:6px 14px;">Exportar CSV</button>
       </div>
-      <div class="tabela-wrap" id="tabela-urnas"></div>
+      <div id="tabela-urnas"></div>
     </div>
 
-    <!-- RÁDIO -->
     <div id="radio" class="painel">
       <div class="radio-card">
-        <div class="radio-header">
-          <div class="dot-vivo"></div>
-          <div class="radio-titulo">Texto ao vivo — Grupo RVA Rádio</div>
-        </div>
-        <div class="radio-texto" id="radio-texto">Aguardando as primeiras urnas...</div>
+        <div class="radio-header"><div class="dot-vivo"></div><div class="radio-titulo">Texto ao vivo — Transmissão</div></div>
+        <div class="radio-texto" id="radio-texto">Aguardando as primeiras urnas para gerar o texto...</div>
       </div>
       <div class="radio-acoes">
         <button class="btn-primary" onclick="copiarTexto()">Copiar texto</button>
         <button class="btn-secondary" onclick="gerarTexto()">Atualizar</button>
       </div>
-      <p style="font-size:13px;color:var(--texto2);">Texto gerado automaticamente a cada urna registrada. Pronto para leitura no ar.</p>
+      <p style="font-size:13px;color:var(--texto2);">Atualizado automaticamente a cada urna registrada. Pronto para leitura no ar.</p>
     </div>
 
-    <!-- CONFIG -->
     <div id="config" class="painel">
       <div class="config-section">
         <div class="config-titulo">Candidatos e partidos</div>
@@ -281,13 +307,13 @@
           <label>Quantidade total</label>
           <input type="number" id="cfg-total-urnas" value="176" min="1">
         </div>
-        <p style="font-size:12px;color:var(--texto2);margin-top:6px;">Venâncio Aires teve 176 urnas em 2024.</p>
+        <p style="font-size:12px;color:var(--texto3);margin-top:8px;">Venâncio Aires teve 176 urnas em 2024.</p>
       </div>
       <div class="config-section">
         <div class="config-titulo">Alterar senha de acesso</div>
         <div class="form-group" style="max-width:260px;">
           <label>Nova senha</label>
-          <input type="password" id="cfg-senha" placeholder="Digite a nova senha">
+          <input type="password" id="cfg-senha" placeholder="Deixe em branco para manter">
         </div>
       </div>
       <div class="btn-row" style="margin-top:1rem;">
@@ -300,28 +326,34 @@
   </div>
 </div>
 
-<!-- PAINEL PÚBLICO (ouvintes) -->
+<!-- PAINEL PÚBLICO -->
 <div id="tela-publica">
-  <div class="pub-header">
-    <div class="pub-title">🗳️ Apuração ao vivo — Venâncio Aires 2026</div>
-    <div class="pub-sub">Grupo RVA Rádio · Atualiza automaticamente</div>
+  <div class="pub-topbar">
+    <div class="pub-hero">
+      <div class="pub-icone">🗳️</div>
+      <div>
+        <div class="pub-title">Apuração ao vivo<br>Venâncio Aires 2026</div>
+        <div class="pub-sub">Eleições municipais · Venâncio Aires / RS</div>
+        <div class="pub-live"><div class="dot-vivo"></div> Ao vivo</div>
+      </div>
+    </div>
   </div>
   <div class="pub-content">
-    <div class="pub-ultimo" id="pub-ultimo">Carregando...</div>
+    <div class="pub-ultimo" id="pub-ultimo">Carregando dados...</div>
     <div class="metrics" id="pub-metricas"></div>
     <div class="prog-wrap">
       <div class="prog-label">Apurado</div>
       <div class="prog-track"><div class="prog-fill" id="pub-prog-fill" style="width:0%"></div></div>
       <div class="prog-pct" id="pub-prog-pct">0%</div>
-      <div style="font-size:13px;color:var(--texto2);" id="pub-prog-nums">0 / 0</div>
+      <div class="prog-nums" id="pub-prog-nums">0 / 0</div>
     </div>
-    <div class="section-title">Resultado parcial</div>
+    <div class="section-label">Resultado parcial</div>
     <div class="candidatos-lista" id="pub-candidatos"></div>
     <div class="chart-card">
-      <div class="section-title">Votos por urna (últimas)</div>
+      <div class="section-label">Votos por urna — últimas apuradas</div>
       <div class="chart-wrap"><canvas id="pub-grafico"></canvas></div>
     </div>
-    <p style="font-size:12px;color:var(--texto3);text-align:center;margin-top:1rem;">Dados extraoficiais apurados pela equipe Grupo RVA Rádio</p>
+    <div class="pub-footer">Dados extraoficiais apurados em tempo real · Atualiza automaticamente</div>
   </div>
 </div>
 
@@ -329,7 +361,6 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  // ── Firebase config ──────────────────────────────────────────
   const firebaseConfig = {
     apiKey: "AIzaSyCdnsvHPg_WvpyUN01Eczr4hckMiBW5W3w",
     authDomain: "eleicoes-bd47b.firebaseapp.com",
@@ -342,7 +373,6 @@
   const firebase = initializeApp(firebaseConfig);
   const db = getDatabase(firebase);
 
-  // ── Estado local ─────────────────────────────────────────────
   let estado = {
     candidatos: [
       {nome:'Cândido', partido:'PT'},
@@ -350,50 +380,33 @@
       {nome:'Maciel Marasca', partido:'PP'},
       {nome:'Giovane', partido:'PSB'}
     ],
-    urnas: {},
-    totalUrnas: 176,
-    senha: 'rva2026'
+    urnas: {}, totalUrnas: 176, senha: 'rva2026'
   };
 
-  const CORES = ['#1D9E75','#378ADD','#D85A30','#888780','#BA7517','#993556'];
-  const CORES_BG = ['rgba(29,158,117,0.15)','rgba(55,138,221,0.15)','rgba(216,90,48,0.15)','rgba(136,135,128,0.15)'];
+  const CORES = ['#16A34A','#2563EB','#DC2626','#6B7280','#C8972A','#7C3AED'];
+  const CORES_BG = ['rgba(22,163,74,0.12)','rgba(37,99,235,0.12)','rgba(220,38,38,0.12)','rgba(107,114,128,0.12)'];
   let chartAdmin = null, chartPub = null;
   let modoPublico = new URLSearchParams(location.search).get('publico') === '1';
 
-  // ── Firebase listeners ────────────────────────────────────────
   onValue(ref(db, 'config'), snap => {
-    const d = snap.val();
-    if (!d) return;
+    const d = snap.val(); if (!d) return;
     if (d.candidatos) estado.candidatos = d.candidatos;
     if (d.totalUrnas) estado.totalUrnas = d.totalUrnas;
     if (d.senha) estado.senha = d.senha;
     atualizar();
   });
+  onValue(ref(db, 'urnas'), snap => { estado.urnas = snap.val() || {}; atualizar(); });
 
-  onValue(ref(db, 'urnas'), snap => {
-    estado.urnas = snap.val() || {};
-    atualizar();
-  });
-
-  // ── Auth ──────────────────────────────────────────────────────
   window.entrar = function() {
-    const s = document.getElementById('input-senha').value;
-    if (s === estado.senha) {
-      sessionStorage.setItem('auth', '1');
+    if (document.getElementById('input-senha').value === estado.senha) {
+      sessionStorage.setItem('auth','1');
       document.getElementById('tela-login').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       atualizar();
-    } else {
-      document.getElementById('erro-login').style.display = 'block';
-    }
+    } else { document.getElementById('erro-login').style.display = 'block'; }
   };
+  window.sair = function() { sessionStorage.removeItem('auth'); location.reload(); };
 
-  window.sair = function() {
-    sessionStorage.removeItem('auth');
-    location.reload();
-  };
-
-  // ── Init ──────────────────────────────────────────────────────
   if (modoPublico) {
     document.getElementById('tela-login').style.display = 'none';
     document.getElementById('tela-publica').style.display = 'block';
@@ -402,277 +415,195 @@
     document.getElementById('app').style.display = 'block';
   }
 
-  // ── Abas ──────────────────────────────────────────────────────
   window.mostrarAba = function(id, btn) {
     document.querySelectorAll('.painel').forEach(p => p.classList.remove('ativo'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('ativa'));
-    document.getElementById(id).classList.add('ativo');
-    btn.classList.add('ativa');
-    if (id === 'painel') atualizar();
-    if (id === 'entrada') renderFormCandidatos();
-    if (id === 'urnas') renderTabela();
-    if (id === 'radio') gerarTexto();
-    if (id === 'config') renderConfig();
+    document.getElementById(id).classList.add('ativo'); btn.classList.add('ativa');
+    if (id==='painel') atualizar();
+    if (id==='entrada') renderFormCandidatos();
+    if (id==='urnas') renderTabela();
+    if (id==='radio') gerarTexto();
+    if (id==='config') renderConfig();
   };
 
-  // ── Cálculos ──────────────────────────────────────────────────
   function calcular() {
-    const totais = estado.candidatos.map(() => 0);
-    let totalVotos = 0, brancos = 0, nulos = 0, abstencoes = 0;
+    const totais = estado.candidatos.map(()=>0);
+    let totalVotos=0, brancos=0, nulos=0, abstencoes=0;
     Object.values(estado.urnas).forEach(u => {
-      (u.votos || []).forEach((v, i) => { totais[i] = (totais[i]||0) + v; totalVotos += v; });
-      brancos += u.brancos||0; nulos += u.nulos||0; abstencoes += u.abstencoes||0;
+      (u.votos||[]).forEach((v,i)=>{ totais[i]=(totais[i]||0)+v; totalVotos+=v; });
+      brancos+=u.brancos||0; nulos+=u.nulos||0; abstencoes+=u.abstencoes||0;
     });
     return { totais, totalVotos, brancos, nulos, abstencoes };
   }
 
-  // ── Render principal ──────────────────────────────────────────
   function atualizar() {
     const { totais, totalVotos, brancos, nulos, abstencoes } = calcular();
-    const urnasList = Object.values(estado.urnas);
-    const n = urnasList.length;
-    const total = estado.totalUrnas;
-    const pct = total > 0 ? Math.round((n/total)*100) : 0;
+    const lista = Object.values(estado.urnas);
+    const n = lista.length, total = estado.totalUrnas;
+    const pct = total>0 ? Math.round((n/total)*100) : 0;
 
-    // Admin
     if (document.getElementById('app').style.display !== 'none') {
-      document.getElementById('metricas').innerHTML = metricasHTML(n, total, totalVotos, brancos, nulos, abstencoes);
+      document.getElementById('metricas').innerHTML = metricasHTML(n,total,totalVotos,brancos,nulos,abstencoes);
       document.getElementById('prog-fill').style.width = pct+'%';
       document.getElementById('prog-pct').textContent = pct+'%';
-      document.getElementById('prog-nums').textContent = n+' / '+total;
-      document.getElementById('candidatos-painel').innerHTML = candidatosHTML(totais, totalVotos, 'fill');
-      renderGrafico('grafico-urnas', urnasList, 'admin');
+      document.getElementById('prog-nums').textContent = n+' / '+total+' urnas';
+      document.getElementById('candidatos-painel').innerHTML = candidatosHTML(totais,totalVotos);
+      renderGrafico('grafico-urnas', lista, 'admin');
     }
-
-    // Público
     if (document.getElementById('tela-publica').style.display !== 'none') {
-      document.getElementById('pub-metricas').innerHTML = metricasHTML(n, total, totalVotos, brancos, nulos, abstencoes);
+      document.getElementById('pub-metricas').innerHTML = metricasHTML(n,total,totalVotos,brancos,nulos,abstencoes);
       document.getElementById('pub-prog-fill').style.width = pct+'%';
       document.getElementById('pub-prog-pct').textContent = pct+'%';
       document.getElementById('pub-prog-nums').textContent = n+' / '+total;
-      document.getElementById('pub-candidatos').innerHTML = candidatosHTML(totais, totalVotos, 'fill');
-      document.getElementById('pub-ultimo').textContent = n > 0 ? 'Última atualização: '+new Date().toLocaleTimeString('pt-BR') : 'Aguardando início da apuração...';
-      renderGrafico('pub-grafico', urnasList, 'pub');
+      document.getElementById('pub-candidatos').innerHTML = candidatosHTML(totais,totalVotos);
+      document.getElementById('pub-ultimo').textContent = n>0 ? '⟳ Última atualização: '+new Date().toLocaleTimeString('pt-BR') : 'Aguardando início da apuração...';
+      renderGrafico('pub-grafico', lista, 'pub');
     }
   }
 
-  function metricasHTML(n, total, totalVotos, brancos, nulos, abstencoes) {
-    return `
-      <div class="metric"><div class="metric-label">Urnas apuradas</div><div class="metric-value">${n}</div><div class="metric-sub">de ${total}</div></div>
-      <div class="metric"><div class="metric-label">Votos nominais</div><div class="metric-value">${totalVotos.toLocaleString('pt-BR')}</div></div>
-      <div class="metric"><div class="metric-label">Brancos</div><div class="metric-value">${brancos.toLocaleString('pt-BR')}</div></div>
-      <div class="metric"><div class="metric-label">Nulos</div><div class="metric-value">${nulos.toLocaleString('pt-BR')}</div></div>
-      <div class="metric"><div class="metric-label">Abstenções</div><div class="metric-value">${abstencoes.toLocaleString('pt-BR')}</div></div>`;
+  function metricasHTML(n,total,totalVotos,brancos,nulos,abstencoes) {
+    return `<div class="metric"><div class="metric-label">Urnas apuradas</div><div class="metric-value">${n}</div><div class="metric-sub">de ${total} totais</div></div>
+    <div class="metric"><div class="metric-label">Votos nominais</div><div class="metric-value">${totalVotos.toLocaleString('pt-BR')}</div></div>
+    <div class="metric"><div class="metric-label">Brancos</div><div class="metric-value">${brancos.toLocaleString('pt-BR')}</div></div>
+    <div class="metric"><div class="metric-label">Nulos</div><div class="metric-value">${nulos.toLocaleString('pt-BR')}</div></div>
+    <div class="metric"><div class="metric-label">Abstenções</div><div class="metric-value">${abstencoes.toLocaleString('pt-BR')}</div></div>`;
   }
 
-  function candidatosHTML(totais, totalVotos, fillPrefix) {
-    const ord = estado.candidatos.map((c,i) => ({...c, votos: totais[i]||0, idx:i})).sort((a,b)=>b.votos-a.votos);
-    const max = ord[0]?.votos || 1;
-    return ord.map((c, rank) => {
-      const p = totalVotos > 0 ? ((c.votos/totalVotos)*100).toFixed(1) : '0.0';
-      const bw = max > 0 ? Math.round((c.votos/max)*100) : 0;
+  function candidatosHTML(totais, totalVotos) {
+    const ord = estado.candidatos.map((c,i)=>({...c,votos:totais[i]||0,idx:i})).sort((a,b)=>b.votos-a.votos);
+    const max = ord[0]?.votos||1;
+    return ord.map((c,rank)=>{
+      const p = totalVotos>0?((c.votos/totalVotos)*100).toFixed(1):'0.0';
+      const bw = max>0?Math.round((c.votos/max)*100):0;
       return `<div class="cand-row ${rank===0?'lider':''}">
         <div class="cand-header">
-          <div><span class="cand-nome">${rank+1}. ${c.nome}</span><span class="cand-partido partido-${Math.min(c.idx,4)}">${c.partido}</span></div>
-          <div style="text-align:right"><div class="cand-votos">${c.votos.toLocaleString('pt-BR')} votos</div><div class="cand-pct">${p}% dos válidos</div></div>
+          <div class="cand-esq">
+            <span class="cand-rank ${rank===0?'primeiro':''}">${rank+1}</span>
+            <div><span class="cand-nome">${c.nome}</span><span class="cand-partido partido-${Math.min(c.idx,4)}">${c.partido}</span></div>
+          </div>
+          <div class="cand-dir"><div class="cand-votos">${c.votos.toLocaleString('pt-BR')}</div><div class="cand-pct">${p}% dos válidos</div></div>
         </div>
         <div class="bar-track"><div class="bar-fill fill-${Math.min(c.idx,4)}" style="width:${bw}%"></div></div>
       </div>`;
     }).join('');
   }
 
-  function renderGrafico(canvasId, urnasList, modo) {
-    const ctx = document.getElementById(canvasId);
-    if (!ctx) return;
-    const ultimas = urnasList.slice(-8);
-    const labels = ultimas.map(u => 'S-'+u.secao);
-    const datasets = estado.candidatos.map((c,i) => ({
-      label: c.nome,
-      data: ultimas.map(u => (u.votos||[])[i]||0),
-      backgroundColor: CORES_BG[i]||'rgba(136,135,128,0.15)',
-      borderColor: CORES[i]||'#888780',
-      borderWidth: 1.5, borderRadius: 4
+  function renderGrafico(canvasId, lista, modo) {
+    const ctx = document.getElementById(canvasId); if(!ctx) return;
+    const ult = lista.slice(-8);
+    const datasets = estado.candidatos.map((c,i)=>({
+      label:c.nome, data:ult.map(u=>(u.votos||[])[i]||0),
+      backgroundColor:CORES_BG[i]||'rgba(107,114,128,0.12)',
+      borderColor:CORES[i]||'#6B7280', borderWidth:1.5, borderRadius:4
     }));
-    const existingChart = modo === 'admin' ? chartAdmin : chartPub;
-    if (existingChart) existingChart.destroy();
-    const newChart = new Chart(ctx, {
-      type: 'bar',
-      data: { labels, datasets },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: true, position: 'top', labels: { font:{size:11}, boxWidth:10, padding:10 } } },
-        scales: {
-          x: { grid:{display:false}, ticks:{font:{size:11}} },
-          y: { grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:11}} }
-        }
-      }
-    });
-    if (modo === 'admin') chartAdmin = newChart; else chartPub = newChart;
+    const ex = modo==='admin'?chartAdmin:chartPub; if(ex) ex.destroy();
+    const novo = new Chart(ctx,{type:'bar',data:{labels:ult.map(u=>'S-'+u.secao),datasets},options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'top',labels:{font:{size:11},boxWidth:10,padding:12}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{grid:{color:'rgba(11,31,58,0.05)'},ticks:{font:{size:11}}}}
+    }});
+    if(modo==='admin') chartAdmin=novo; else chartPub=novo;
   }
 
-  // ── Formulário de urna ────────────────────────────────────────
   function renderFormCandidatos() {
-    const c = document.getElementById('form-candidatos');
-    c.innerHTML = '';
-    estado.candidatos.forEach((cand, i) => {
-      c.innerHTML += `<div class="cand-input-item"><label><span class="cand-partido partido-${Math.min(i,4)}">${cand.partido}</span> ${cand.nome}</label><input type="number" id="fv-${i}" min="0" value="0"></div>`;
-    });
+    document.getElementById('form-candidatos').innerHTML = estado.candidatos.map((c,i)=>
+      `<div class="cand-input-item"><label><span class="cand-partido partido-${Math.min(i,4)}" style="margin:0 6px 0 0;">${c.partido}</span>${c.nome}</label><input type="number" id="fv-${i}" min="0" value="0"></div>`
+    ).join('');
   }
 
   window.limparForm = function() {
-    document.getElementById('f-secao').value = '';
-    document.getElementById('f-local').value = '';
-    document.getElementById('f-brancos').value = 0;
-    document.getElementById('f-nulos').value = 0;
-    document.getElementById('f-abstencoes').value = 0;
-    estado.candidatos.forEach((_,i) => { const el = document.getElementById('fv-'+i); if(el) el.value = 0; });
+    ['f-secao','f-local'].forEach(id=>document.getElementById(id).value='');
+    ['f-brancos','f-nulos','f-abstencoes'].forEach(id=>document.getElementById(id).value=0);
+    estado.candidatos.forEach((_,i)=>{ const el=document.getElementById('fv-'+i); if(el) el.value=0; });
   };
 
   window.registrarUrna = async function() {
     const secao = document.getElementById('f-secao').value.trim();
-    const local = document.getElementById('f-local').value.trim();
-    if (!secao) { mostrarAlerta('alerta-form', 'Informe o número da seção.', 'info'); return; }
-    if (estado.urnas['s'+secao]) { mostrarAlerta('alerta-form', `Seção ${secao} já foi registrada!`, 'info'); return; }
-    const votos = estado.candidatos.map((_,i) => parseInt(document.getElementById('fv-'+i)?.value)||0);
+    if (!secao) { mostrarAlerta('alerta-form','Informe o número da seção.','info'); return; }
+    if (estado.urnas['s'+secao]) { mostrarAlerta('alerta-form',`Seção ${secao} já foi registrada!`,'info'); return; }
     const urna = {
-      secao: parseInt(secao),
-      local: local || 'Não informado',
-      votos,
-      brancos: parseInt(document.getElementById('f-brancos').value)||0,
-      nulos: parseInt(document.getElementById('f-nulos').value)||0,
-      abstencoes: parseInt(document.getElementById('f-abstencoes').value)||0,
-      ts: new Date().toLocaleTimeString('pt-BR')
+      secao:parseInt(secao), local:document.getElementById('f-local').value.trim()||'Não informado',
+      votos:estado.candidatos.map((_,i)=>parseInt(document.getElementById('fv-'+i)?.value)||0),
+      brancos:parseInt(document.getElementById('f-brancos').value)||0,
+      nulos:parseInt(document.getElementById('f-nulos').value)||0,
+      abstencoes:parseInt(document.getElementById('f-abstencoes').value)||0,
+      ts:new Date().toLocaleTimeString('pt-BR')
     };
-    try {
-      await set(ref(db, 'urnas/s'+secao), urna);
-      mostrarAlerta('alerta-form', `Seção ${secao} registrada com sucesso!`, 'ok');
-      limparForm();
-    } catch(e) {
-      mostrarAlerta('alerta-form', 'Erro ao salvar. Verifique a conexão.', 'erro');
-    }
+    try { await set(ref(db,'urnas/s'+secao),urna); mostrarAlerta('alerta-form',`Seção ${secao} registrada!`,'ok'); limparForm(); }
+    catch(e) { mostrarAlerta('alerta-form','Erro ao salvar. Verifique a conexão.','erro'); }
   };
 
-  // ── Tabela ────────────────────────────────────────────────────
   window.renderTabela = function() {
     const cont = document.getElementById('tabela-urnas');
-    const lista = Object.values(estado.urnas);
-    if (lista.length === 0) { cont.innerHTML = '<div class="empty">Nenhuma urna registrada ainda.</div>'; return; }
-    lista.sort((a,b) => a.secao - b.secao);
+    const lista = Object.values(estado.urnas).sort((a,b)=>a.secao-b.secao);
+    if (!lista.length) { cont.innerHTML='<div class="empty">Nenhuma urna registrada ainda.</div>'; return; }
     const ths = ['Seção','Local','Horário',...estado.candidatos.map(c=>c.nome),'Brancos','Nulos','Abstenções',''];
-    let html = `<table><thead><tr>${ths.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
-    lista.forEach(u => {
-      html += `<tr><td><strong>${u.secao}</strong></td><td>${u.local}</td><td>${u.ts}</td>`;
-      (u.votos||[]).forEach(v => { html += `<td>${v}</td>`; });
-      html += `<td>${u.brancos}</td><td>${u.nulos}</td><td>${u.abstencoes}</td>`;
-      html += `<td><button class="btn-danger" onclick="removerUrna('s${u.secao}')">remover</button></td></tr>`;
-    });
-    html += '</tbody></table>';
-    cont.innerHTML = html;
+    cont.innerHTML = `<div class="tabela-wrap"><table><thead><tr>${ths.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${
+      lista.map(u=>`<tr><td><strong>${u.secao}</strong></td><td>${u.local}</td><td>${u.ts}</td>${(u.votos||[]).map(v=>`<td>${v}</td>`).join('')}<td>${u.brancos}</td><td>${u.nulos}</td><td>${u.abstencoes}</td><td><button class="btn-danger" onclick="removerUrna('s${u.secao}')">remover</button></td></tr>`).join('')
+    }</tbody></table></div>`;
   };
 
   window.removerUrna = async function(key) {
     if (!confirm('Remover esta urna?')) return;
-    await remove(ref(db, 'urnas/'+key));
+    await remove(ref(db,'urnas/'+key));
   };
 
   window.exportarCSV = function() {
-    const lista = Object.values(estado.urnas);
-    if (lista.length === 0) return;
+    const lista = Object.values(estado.urnas); if(!lista.length) return;
     const headers = ['Seção','Local','Horário',...estado.candidatos.map(c=>c.nome+' ('+c.partido+')'),'Brancos','Nulos','Abstenções'];
-    const rows = lista.map(u => [u.secao,u.local,u.ts,...(u.votos||[]),u.brancos,u.nulos,u.abstencoes]);
-    const csv = [headers,...rows].map(r=>r.join(',')).join('\n');
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-    a.download = 'apuracao_venancio_aires_2026.csv';
-    a.click();
+    const csv = [headers,...lista.map(u=>[u.secao,u.local,u.ts,...(u.votos||[]),u.brancos,u.nulos,u.abstencoes])].map(r=>r.join(',')).join('\n');
+    const a = document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='apuracao_venancio_aires_2026.csv'; a.click();
   };
 
-  // ── Rádio ─────────────────────────────────────────────────────
   window.gerarTexto = function() {
-    const { totais, totalVotos, brancos, nulos } = calcular();
-    const n = Object.values(estado.urnas).length;
-    const total = estado.totalUrnas;
-    const pct = total > 0 ? Math.round((n/total)*100) : 0;
-    if (n === 0) { document.getElementById('radio-texto').textContent = 'Aguardando as primeiras urnas...'; return; }
-    const ord = estado.candidatos.map((c,i) => ({...c, votos:totais[i]||0})).sort((a,b)=>b.votos-a.votos);
-    const lider = ord[0], seg = ord[1];
-    const diff = lider.votos - seg.votos;
-    const p1 = totalVotos > 0 ? ((lider.votos/totalVotos)*100).toFixed(1) : '0';
-    const p2 = totalVotos > 0 ? ((seg.votos/totalVotos)*100).toFixed(1) : '0';
-    let t = `Atenção ouvintes da Rádio RVA! Apuração parcial com ${n} de ${total} urnas apuradas — ${pct}% do total. `;
-    t += `Na liderança parcial está ${lider.nome}, do ${lider.partido}, com ${lider.votos.toLocaleString('pt-BR')} votos — ${p1}% dos válidos. `;
-    t += `Em segundo lugar, ${seg.nome}, do ${seg.partido}, com ${seg.votos.toLocaleString('pt-BR')} votos — ${p2}% — e diferença de ${diff.toLocaleString('pt-BR')} votos para o líder. `;
-    if (ord[2]) { const p3 = totalVotos>0?((ord[2].votos/totalVotos)*100).toFixed(1):'0'; t += `${ord[2].nome}, do ${ord[2].partido}, aparece em terceiro com ${ord[2].votos.toLocaleString('pt-BR')} votos — ${p3}%. `; }
-    t += `Foram registrados ${brancos.toLocaleString('pt-BR')} votos em branco e ${nulos.toLocaleString('pt-BR')} nulos. Continuamos ao vivo aqui na Rádio RVA com todos os números em primeira mão!`;
-    document.getElementById('radio-texto').textContent = t;
+    const {totais,totalVotos,brancos,nulos} = calcular();
+    const n=Object.values(estado.urnas).length, total=estado.totalUrnas, pct=total>0?Math.round((n/total)*100):0;
+    if (!n) { document.getElementById('radio-texto').textContent='Aguardando as primeiras urnas...'; return; }
+    const ord=estado.candidatos.map((c,i)=>({...c,votos:totais[i]||0})).sort((a,b)=>b.votos-a.votos);
+    const l=ord[0],s=ord[1],diff=l.votos-s.votos;
+    const p1=totalVotos>0?((l.votos/totalVotos)*100).toFixed(1):'0';
+    const p2=totalVotos>0?((s.votos/totalVotos)*100).toFixed(1):'0';
+    let t=`Atenção ouvintes! Apuração parcial com ${n} de ${total} urnas apuradas — ${pct}% do total. `;
+    t+=`Na liderança parcial está ${l.nome}, do ${l.partido}, com ${l.votos.toLocaleString('pt-BR')} votos — ${p1}% dos válidos. `;
+    t+=`Em segundo lugar, ${s.nome}, do ${s.partido}, com ${s.votos.toLocaleString('pt-BR')} votos — ${p2}% — diferença de ${diff.toLocaleString('pt-BR')} votos para o líder. `;
+    if(ord[2]){const p3=totalVotos>0?((ord[2].votos/totalVotos)*100).toFixed(1):'0';t+=`${ord[2].nome}, do ${ord[2].partido}, em terceiro com ${ord[2].votos.toLocaleString('pt-BR')} votos — ${p3}%. `;}
+    t+=`Foram registrados ${brancos.toLocaleString('pt-BR')} brancos e ${nulos.toLocaleString('pt-BR')} nulos. Continuamos ao vivo com todos os números em primeira mão!`;
+    document.getElementById('radio-texto').textContent=t;
   };
 
   window.copiarTexto = function() {
     navigator.clipboard.writeText(document.getElementById('radio-texto').textContent);
-    mostrarAlerta('alerta-form','','');
     alert('Texto copiado!');
   };
 
-  // ── Config ────────────────────────────────────────────────────
   window.renderConfig = function() {
     document.getElementById('cfg-total-urnas').value = estado.totalUrnas;
-    const c = document.getElementById('config-candidatos');
-    c.innerHTML = '';
-    estado.candidatos.forEach((cand, i) => {
-      c.innerHTML += `<div class="cand-config-row">
-        <input type="text" value="${cand.nome}" onchange="estado.candidatos[${i}].nome=this.value" placeholder="Nome">
-        <input type="text" class="partido" value="${cand.partido}" onchange="estado.candidatos[${i}].partido=this.value" placeholder="Partido">
-        <button class="btn-danger" onclick="removerCandidato(${i})">✕</button>
-      </div>`;
-    });
+    document.getElementById('config-candidatos').innerHTML = estado.candidatos.map((c,i)=>
+      `<div class="cand-config-row"><input type="text" value="${c.nome}" onchange="estado.candidatos[${i}].nome=this.value" placeholder="Nome"><input type="text" class="partido" value="${c.partido}" onchange="estado.candidatos[${i}].partido=this.value" placeholder="Partido"><button class="btn-danger" onclick="removerCandidato(${i})">✕</button></div>`
+    ).join('');
   };
 
-  window.addCandidato = function() {
-    estado.candidatos.push({nome:'Candidato', partido:'Partido'});
-    renderConfig();
-  };
-
-  window.removerCandidato = function(i) {
-    if (estado.candidatos.length <= 2) return;
-    estado.candidatos.splice(i,1);
-    renderConfig();
-  };
+  window.addCandidato = function() { estado.candidatos.push({nome:'Candidato',partido:'Partido'}); renderConfig(); };
+  window.removerCandidato = function(i) { if(estado.candidatos.length<=2)return; estado.candidatos.splice(i,1); renderConfig(); };
 
   window.salvarConfig = async function() {
-    const novaSenha = document.getElementById('cfg-senha').value.trim();
-    const cfg = {
-      candidatos: estado.candidatos,
-      totalUrnas: parseInt(document.getElementById('cfg-total-urnas').value)||176,
-      senha: novaSenha || estado.senha
-    };
-    try {
-      await set(ref(db,'config'), cfg);
-      mostrarAlerta('alerta-config','Configurações salvas com sucesso!','ok');
-      document.getElementById('cfg-senha').value = '';
-    } catch(e) {
-      mostrarAlerta('alerta-config','Erro ao salvar.','erro');
-    }
+    const cfg={candidatos:estado.candidatos,totalUrnas:parseInt(document.getElementById('cfg-total-urnas').value)||176,senha:document.getElementById('cfg-senha').value.trim()||estado.senha};
+    try { await set(ref(db,'config'),cfg); mostrarAlerta('alerta-config','Configurações salvas!','ok'); document.getElementById('cfg-senha').value=''; }
+    catch(e) { mostrarAlerta('alerta-config','Erro ao salvar.','erro'); }
   };
 
   window.zerarDados = async function() {
-    if (!confirm('Zerar TODOS os dados de apuração? Esta ação não pode ser desfeita.')) return;
-    await remove(ref(db,'urnas'));
-    mostrarAlerta('alerta-config','Dados zerados com sucesso.','ok');
+    if(!confirm('Zerar TODOS os dados? Esta ação não pode ser desfeita.'))return;
+    await remove(ref(db,'urnas')); mostrarAlerta('alerta-config','Dados zerados.','ok');
   };
 
-  // ── Utilitários ───────────────────────────────────────────────
-  function mostrarAlerta(id, msg, tipo) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.className = 'alerta alerta-'+tipo;
-    el.textContent = msg;
-    el.style.display = 'block';
-    setTimeout(() => { el.style.display = 'none'; }, 3500);
+  function mostrarAlerta(id,msg,tipo) {
+    const el=document.getElementById(id); if(!el)return;
+    el.className='alerta alerta-'+tipo; el.textContent=msg; el.style.display='block';
+    setTimeout(()=>el.style.display='none',3500);
   }
 
-  // Expor estado para o config inline
   window.estado = estado;
-
   renderFormCandidatos();
   atualizar();
 </script>
